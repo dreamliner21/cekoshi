@@ -47,7 +47,7 @@
             border-radius: 10px;
             margin-top: 10px;
             display: none; /* Start with image hidden */
-            cursor: not-allowed
+            cursor: not-allowed;
         }
         .cooldown {
             opacity: 0.6;
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <audio id="background-audio" class="hidden" controls autoplay loop>
+    <audio id="background-audio" class="hidden" loop>
         <source src="backsound.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -157,7 +157,7 @@
             setTimeout(() => {
                 // Sembunyikan spinner
                 loadingSpinner.style.display = 'none';
-                oshiImage.style.display = 'block'; // Tampilkan gambar
+                document.getElementById('oshiImage').style.display = 'block'; // Tampilkan gambar
 
                 // Tampilkan nama Oshi dan gambar
                 document.querySelector('.oshi-info').style.display = 'block';
@@ -180,13 +180,16 @@
                     isCooldown = false;
                     cekButton.classList.remove('cooldown');
                     cekButton.disabled = false;
-                    cekButton.innerHTML = '<i class="fas fa-search"></i> Cek';
+                                        cekButton.innerHTML = '<i class="fas fa-search"></i> Cek';
                 }
             }, 1000);
-        }
 
-        // Pastikan audio diputar saat halaman dimuat
-        document.getElementById('background-audio').play();
+            // Putar audio
+            const audio = document.getElementById('background-audio');
+            audio.play().catch(error => {
+                console.error("Audio play failed: ", error);
+            });
+        }
     </script>
 </body>
 </html>
