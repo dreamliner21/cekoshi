@@ -8,86 +8,17 @@
     <meta name="keywords" content="Cek Oshi online" />
     <meta name="keywords" content="Cek Oshi JKT48" />
     <meta name="keywords" content="Cek Oshiku" />
-    <meta name="description" content="Cek Oshimu sekarang. Cek oshi online dan gratis. Developt By Paul Christi" />
-    <title>Cek Oshiku Online</title>
+    <meta name="description" content="Cek Oshimu sekarang. Cek oshi online dan gratis. Development By Paul Christi" />
+    <title>Cek Oshiku</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.7/dist/sweetalert2.min.css">
-    <style>
-        body {
-            background-image: url('https://telegra.ph/file/a3588bee525b657062eb2.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.7); /* Fallback for browsers that do not support backdrop-filter */
-            backdrop-filter: blur(10px); /* Efek blur untuk background */
-        }
-        .result-box {
-            position: relative;
-        }
-        .result-content {
-            margin-top: 10px;
-            text-align: center;
-        }
-        .result-box img {
-            width: 100%;
-            height: 50vh;
-            border-radius: 10px;
-            margin-top: 10px;
-            display: none; /* Start with image hidden */
-            cursor: not-allowed;
-        }
-        .cooldown {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .loading-spinner {
-            display: none;
-            width: 30px;
-            height: 30px;
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        .oshi-info {
-            display: none;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        @media (min-width: 768px) {
-            body {
-                padding: 40px;
-            }
-            .container {
-                padding: 40px;
-            }
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="input-box">
-            <h1><i class="fas fa-user"></i> Cek Oshi</h1>
+            <h1><i class="fas fa-user"></i> Cek Oshiku</h1>
             <input type="text" id="nameInput" class="form-control" placeholder="Masukkan nama Anda">
             <button id="cekButton" class="btn btn-primary mt-3" onclick="cekOshi()"><i class="fas fa-search"></i> Cek</button>
         </div>
@@ -97,109 +28,13 @@
         </div>
     </div>
 
-    <audio id="background-audio" class="hidden" loop>
-        <source src="backsound.mp3" type="audio/mpeg">
+    <audio id="background-audio" autoplay loop>
+        <source src="https://a.top4top.io/m_3107t39440.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.7/dist/sweetalert2.all.min.js"></script>
-    <script>
-        function pickRandom(list) {
-            return list[Math.floor(Math.random() * list.length)];
-        }
-
-        const oshiList = [
-            { name: "Angelina Christy", image: "https://telegra.ph/file/a18ce91790f1a86b25024.jpg" }, 
-            { name: "Freya Jayawardana", image: "https://telegra.ph/file/ede7f8a23b81d11a6ea11.jpg" }, 
-            { name: "Shania Gracia", image: "https://telegra.ph/file/be32cf9bafd5180630158.jpg" },
-            { name: "Feni Fitriyanti", image: "https://telegra.ph/file/1e3d6416a2de6f3c7f2d5.jpg" }, 
-            { name: "Shani Indira Natio", image: "https://telegra.ph/file/3e36411e957693df9915d.jpg" },
-            { name: "Lulu Salsabila", image: "https://telegra.ph/file/b3f9f1d48645ecaf127b3.jpg" }, 
-            { name: "Reva Fidela", image: "https://telegra.ph/file/6052a253d49994bf0be99.jpg" }, 
-            { name: "Indah Cahya", image: "https://telegra.ph/file/1a3c3b61598f10abc5ba8.jpg" },
-            { name: "Kathrina Irene", image: "https://telegra.ph/file/3a790cd77b2d77b34ffcb.jpg" }, 
-            { name: "Marsha Lenathea", image: "https://telegra.ph/file/1c4b1b7a6ab317ea456da.jpg" },
-            { name: "Amanda Sukma", image: "https://telegra.ph/file/e579415b04a289834621f.jpg" }, 
-            { name: "Aurellia", image: "https://telegra.ph/file/0d0ca8b90a20a3a9605ad.jpg" }, 
-            { name: "Callista Alifia", image: "https://telegra.ph/file/482f6291a60cd8d232949.jpg" },
-            { name: "Gabriela Abigail", image: "https://telegra.ph/file/f1fb015a8242b16acbc2f.jpg" },
-            { name: "Indira Seruni", image: "https://telegra.ph/file/6e9f3092b06060eb2fd97.jpg" },
-            { name: "Jesselyn Elly", image: "https://telegra.ph/file/08c5973e844e22c4b1cfd.jpg" }, 
-            { name: "Raisha Syifa", image: "https://telegra.ph/file/59dc73f9c2588e167386c.jpg" },
-            { name: "Alya Amanda", image: "https://telegra.ph/file/ae3ac658dfe04d3daa5d7.jpg" },
-            { name: "Anindya Ramadhani", image: "https://telegra.ph/file/43b0eacbece79d3c26f41.jpg" },
-            { name: "Cathleen Nixie", image: "https://telegra.ph/file/54c2d556973aebb227067.jpg" },
-            { name: "Celline Thefani", image: "https://telegra.ph/file/031f33bdfc20620948194.jpg" },
-            { name: "Chelsea Davina", image: "https://telegra.ph/file/8e6b0a4c0b2cf9b203620.jpg" },
-        ];
-
-        let isCooldown = false;
-
-        function cekOshi() {
-            if (isCooldown) return;
-
-            const name = document.getElementById('nameInput').value.trim();
-            if (!name) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ketik namanya dengan benar!',
-                });
-                return;
-            }
-
-            const oshi = pickRandom(oshiList);
-            const response = `
-                <div class="oshi-info">
-                    <p><b><i class="fas fa-user-circle"></i> Nama: ${name}</b></p>
-                    <p><i class="fas fa-heart"></i> Oshi: ${oshi.name}</p>
-                    <img id="oshiImage" src="${oshi.image}" alt="${oshi.name}">
-                </div>
-            `;
-            document.querySelector('.result-content').innerHTML = response;
-
-            // Tampilkan spinner
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            loadingSpinner.style.display = 'block';
-
-            // Tunggu beberapa detik sebelum menampilkan nama Oshi dan gambar
-            setTimeout(() => {
-                // Sembunyikan spinner
-                loadingSpinner.style.display = 'none';
-                document.getElementById('oshiImage').style.display = 'block'; // Tampilkan gambar
-
-                // Tampilkan nama Oshi dan gambar
-                document.querySelector('.oshi-info').style.display = 'block';
-            }, 1000);
-
-            isCooldown = true;
-            const cekButton = document.getElementById('cekButton');
-            cekButton.classList.add('cooldown');
-            cekButton.disabled = true;
-
-            let cooldownTime = 10;
-            cekButton.innerHTML = `Cek (${cooldownTime})`;
-
-            const interval = setInterval(() => {
-                cooldownTime -= 1;
-                cekButton.innerHTML = `Cek (${cooldownTime})`;
-
-                if (cooldownTime <= 0) {
-                    clearInterval(interval);
-                    isCooldown = false;
-                    cekButton.classList.remove('cooldown');
-                    cekButton.disabled = false;
-                                        cekButton.innerHTML = '<i class="fas fa-search"></i> Cek';
-                }
-            }, 1000);
-
-            // Putar audio
-            const audio = document.getElementById('background-audio');
-            audio.play().catch(error => {
-                console.error("Audio play failed: ", error);
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
