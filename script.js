@@ -63,7 +63,16 @@
         }
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('background-audio');
-    audio.volume = 0.5
+            const sources = audio.getElementsByTagName('source');
+            let currentTrack = 0;
+    audio.volume = 1
+    audio.addEventListener('ended', () => {
+                currentTrack = (currentTrack + 1) % sources.length;
+                audio.src = sources[currentTrack].src;
+                audio.play().catch(error => {
+                    console.error("Audio play failed: ", error);
+                });
+            });
     document.addEventListener('click', () => {
         audio.play().catch(error => {
             console.error("Audio play failed: ", error);
