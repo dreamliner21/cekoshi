@@ -2,103 +2,176 @@ body {
     background-image: url('https://telegra.ph/file/a3588bee525b657062eb2.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
-    font-family: Arial, sans-serif;
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
     margin: 0;
+    overflow: hidden;
 }
 
 .container {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.7); /* Fallback for browsers that do not support backdrop-filter */
-            backdrop-filter: blur(10px); /* Efek blur untuk background */
-        }
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.input-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .result-box {
-            position: relative;
-        }
-        .result-content {
-            margin-top: 10px;
-            text-align: center;
-        }
-        .result-box img {
-            width: 100%;
-            height: 50vh;
-            border-radius: 10px;
-            margin-top: 10px;
-            display: none; /* Start with image hidden */
-            cursor: not-allowed;
-        }
-        .cooldown {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+    position: relative;
+}
+
+.result-content {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.result-box img, .result-box video {
+    width: 100%;
+    height: 50vh;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+    cursor: not-allowed;
+}
+
+.result-box img:hover, .result-box video:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
 
 .loading-spinner {
-            display: none;
-            width: 30px;
-            height: 30px;
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
 .oshi-info {
     display: none;
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Gaya untuk ikon info 'i' */
+    #infoIcon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+/* Gaya untuk popup jiko */
+.jiko-popup {
+    display: none; /* Disembunyikan secara default */
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.jiko-content p {
+    margin: 10px 0;
+}
+
+#jikoPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#jikoPopup .popup-content {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+}
+
+#jikoPopup .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #444;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.footer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
-
-@media (min-width: 768px) {
-    body {
-        padding: 40px;
-    }
-    .container {
-        padding: 40px;
-    }
-}
-
-.hidden {
-    display: none;
-}
-
-.footer {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-.footer .social-links {
-    margin-bottom: 10px;
-}
-
-.footer .social-icon {
-    color: white;
-    margin: 0 10px;
-    font-size: 24px;
-    transition: color 0.3s ease;
-}
-
-.footer .social-icon:hover {
-    color: #f39c12; /* Change this color to the one you prefer */
-}
-
-.footer .footer-text {
-    color: white;
-    font-size: 16px;
-    margin: 0;
-    }
